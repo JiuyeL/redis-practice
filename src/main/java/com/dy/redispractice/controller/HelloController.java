@@ -24,6 +24,7 @@ public class HelloController {
     @GetMapping("/hello")
     public String test(){
         ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
+        valueOperations.set("hello", "I'm study redis now");
         String hello = valueOperations.get("hello");
         return hello;
     }
