@@ -1,7 +1,6 @@
 package com.dy.redispractice.chapter.chapter1;
 
 import com.dy.redispractice.util.SystemUtil;
-import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.BoundHashOperations;
 import org.springframework.data.redis.core.BoundSetOperations;
@@ -21,7 +20,7 @@ import java.util.Set;
  * @author dongyang
  * @date 2022/10/11 19:56
  */
-@Api(tags = "文章")
+//@Api(tags = "文章")
 @RestController
 @RequestMapping("/article")
 public class ArticleController {
@@ -54,7 +53,7 @@ public class ArticleController {
         double newScore = score.score(articleId) + SCORE;
         score.add(articleId, newScore);
         //2、将用户加入已经投票里面
-        BoundSetOperations voted = redisTemplate.boundSetOps("voted" + article.getId());
+        BoundSetOperations voted = redisTemplate.boundSetOps("voted:" + article.getId());
         voted.add(SystemUtil.getCurrentUserCode());
     }
 
